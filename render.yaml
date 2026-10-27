@@ -7,7 +7,8 @@ services:
     buildCommand: npm install
     startCommand: npm start
     healthCheckPath: /health
-    plan: free
+    plan: starter        # multiple instances need a paid plan (free runs a single instance)
+    numInstances: 2      # horizontal scaling: 2 containers behind Render's load balancer
     envVars:
       - key: MONGODB_URI
         sync: false
