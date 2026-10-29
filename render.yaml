@@ -66,3 +66,15 @@ services:
         sync: false
       - key: NODE_VERSION
         value: 20
+
+  - type: web
+    name: student-dummy-service
+    runtime: node
+    rootDir: dummy-service
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /health
+    plan: free
+    envVars:
+      - key: NODE_VERSION
+        value: 20
