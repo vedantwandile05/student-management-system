@@ -31,42 +31,61 @@ async function callApi(path, options = {}) {
   }
 }
 
+/* ---------- Shared schema: the fields the backend accepts ---------- */
+const studentId = z.string().describe('Student ID, e.g. ST101');
+const fields = {
+  name: z.string().describe('Full name'),
+  email: z.string().describe('Email address'),
+  department: z.string().describe('Department'),
+  semester: z.union([z.string(), z.number()]).describe('Semester'),
+  contact: z.string().describe('Contact number')
+};
+
 /* ---------- Tool definitions ---------- */
 function buildServer() {
   const server = new McpServer({ name: 'student-mcp-server', version: '1.0.0' });
 
-  server.tool('list_students', 'List all students', async () => callApi(''));
+  server.tool(
+    'list_students',
+    'List all students, optionally filtered by a search term (matches ID, name, email or department)',
+    { search: z.string().optional().describe('Optional search text') },
+    async ({ search }) => callApi(search ? `?search=${encodeURIComponent(search)}` : '')
+  );
 
   server.tool(
     'get_student',
-    'Get a single student by their database ID',
-    { id: z.string().describe('Student document ID') },
-    async ({ id }) => callApi(`/${encodeURIComponent(id)}`)
+    'Get a single student by Student ID (e.g. ST101)',
+    { studentId },
+    async ({ studentId }) => callApi(`/${encodeURIComponent(studentId)}`)
   );
 
   server.tool(
     'create_student',
-    'Create a new student. Pass the student fields exactly as the backend model expects them.',
-    { data: z.record(z.any()).describe('Student fields as a JSON object') },
-    async ({ data }) => callApi('', { method: 'POST', body: JSON.stringify(data) })
+    'Create a new student',
+    { studentId, ...fields },
+    async (args) => callApi('', { method: 'POST', body: JSON.stringify(args) })
   );
 
   server.tool(
     'update_student',
-    'Update an existing student by ID with the given fields',
+    'Update an existing student. The Student ID itself cannot be changed; provide only the fields to change.',
     {
-      id: z.string().describe('Student document ID'),
-      data: z.record(z.any()).describe('Fields to update as a JSON object')
+      studentId,
+      name: fields.name.optional(),
+      email: fields.email.optional(),
+      department: fields.department.optional(),
+      semester: fields.semester.optional(),
+      contact: fields.contact.optional()
     },
-    async ({ id, data }) =>
-      callApi(`/${encodeURIComponent(id)}`, { method: 'PUT', body: JSON.stringify(data) })
+    async ({ studentId, ...changes }) =>
+      callApi(`/${encodeURIComponent(studentId)}`, { method: 'PUT', body: JSON.stringify(changes) })
   );
 
   server.tool(
     'delete_student',
-    'Delete a student by ID',
-    { id: z.string().describe('Student document ID') },
-    async ({ id }) => callApi(`/${encodeURIComponent(id)}`, { method: 'DELETE' })
+    'Delete a student by Student ID',
+    { studentId },
+    async ({ studentId }) => callApi(`/${encodeURIComponent(studentId)}`, { method: 'DELETE' })
   );
 
   return server;

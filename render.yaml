@@ -30,3 +30,19 @@ services:
         sync: false
       - key: NODE_VERSION
         value: 20
+
+  - type: web
+    name: student-reports-service
+    runtime: node
+    rootDir: reports-service
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /health
+    plan: starter
+    envVars:
+      - key: API_BASE_URL   # your student-api URL, e.g. https://student-api.onrender.com
+        sync: false
+      - key: FRONTEND_URL   # optional: Netlify URL if the frontend will call this service
+        sync: false
+      - key: NODE_VERSION
+        value: 20
