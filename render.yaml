@@ -90,3 +90,74 @@ services:
     envVars:
       - key: NODE_VERSION
         value: 20
+
+  # Dummy services 3-7 share the dummy-service/ code; SERVICE_NAME tells them apart.
+  - type: web
+    name: student-dummy-service-3
+    runtime: node
+    rootDir: dummy-service
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /health
+    plan: free
+    envVars:
+      - key: SERVICE_NAME
+        value: Dummy Service 3
+      - key: NODE_VERSION
+        value: 20
+
+  - type: web
+    name: student-dummy-service-4
+    runtime: node
+    rootDir: dummy-service
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /health
+    plan: free
+    envVars:
+      - key: SERVICE_NAME
+        value: Dummy Service 4
+      - key: NODE_VERSION
+        value: 20
+
+  - type: web
+    name: student-dummy-service-5
+    runtime: node
+    rootDir: dummy-service
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /health
+    plan: free
+    envVars:
+      - key: SERVICE_NAME
+        value: Dummy Service 5
+      - key: NODE_VERSION
+        value: 20
+
+  - type: web
+    name: student-dummy-service-6
+    runtime: node
+    rootDir: dummy-service
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /health
+    plan: free
+    envVars:
+      - key: SERVICE_NAME
+        value: Dummy Service 6
+      - key: NODE_VERSION
+        value: 20
+
+  - type: web
+    name: student-dummy-service-7
+    runtime: node
+    rootDir: dummy-service
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /health
+    plan: free
+    envVars:
+      - key: SERVICE_NAME
+        value: Dummy Service 7
+      - key: NODE_VERSION
+        value: 20
