@@ -1,21 +1,21 @@
 :root {
-  --ink: #172033;
-  --muted: #5b6577;
-  --paper: #eef1f5;
+  --ink: #2a1d14;
+  --muted: #6b5a4c;
+  --paper: #fdf4ec;
   --panel: #ffffff;
-  --line: #d6dce6;
-  --accent: #0f6b8f;
+  --line: #ecd9c8;
+  --accent: #c2410c;
   --accent-ink: #ffffff;
   --danger: #b3261e;
   --ok: #1e7a4c;
-  --side: #172033;
-  --side-ink: #dfe6f1;
+  --side: #2a1a10;
+  --side-ink: #f5e6d8;
 }
 @media (prefers-color-scheme: dark) {
   :root {
-    --ink: #e6ebf3; --muted: #9aa5b8; --paper: #0f1522; --panel: #182033;
-    --line: #2a3550; --accent: #4cb4dc; --accent-ink: #08202b;
-    --danger: #ff8a80; --ok: #6fd3a0; --side: #0a0f1b; --side-ink: #c5cfdf;
+    --ink: #f5e9de; --muted: #bfa994; --paper: #1a120c; --panel: #261a12;
+    --line: #43301f; --accent: #fb923c; --accent-ink: #2a1204;
+    --danger: #ff8a80; --ok: #6fd3a0; --side: #120b06; --side-ink: #e6d2c0;
   }
 }
 * { box-sizing: border-box; }
@@ -27,7 +27,7 @@ body { margin: 0; font-family: "Public Sans", system-ui, sans-serif; background:
 nav { display: flex; flex-direction: column; gap: 4px; }
 nav button { text-align: left; background: none; border: 0; color: inherit; font: inherit; padding: 10px 12px; border-radius: 6px; cursor: pointer; border-left: 3px solid transparent; }
 nav button:hover { background: rgba(255,255,255,.07); }
-nav button.active { background: rgba(255,255,255,.12); border-left-color: #4cb4dc; color: #fff; font-weight: 600; }
+nav button.active { background: rgba(255,255,255,.12); border-left-color: #fb923c; color: #fff; font-weight: 600; }
 .status { margin-top: auto; font-size: .85rem; display: flex; align-items: center; gap: 8px; opacity: .9; }
 .dot { width: 9px; height: 9px; border-radius: 50%; background: #c9a227; }
 .status.ok .dot { background: #4ad08a; }
@@ -79,7 +79,7 @@ td.row-actions { display: flex; gap: 8px; }
 @media (prefers-color-scheme: dark) { .toast.error { color: #3a0a06; } }
 
 dialog { border: 1px solid var(--line); border-radius: 10px; background: var(--panel); color: var(--ink); padding: 24px; max-width: 420px; }
-dialog::backdrop { background: rgba(10, 15, 27, .55); }
+dialog::backdrop { background: rgba(26, 14, 6, .55); }
 dialog h3 { margin: 0 0 6px; }
 
 @media (max-width: 760px) {
