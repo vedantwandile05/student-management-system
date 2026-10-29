@@ -78,3 +78,15 @@ services:
     envVars:
       - key: NODE_VERSION
         value: 20
+
+  - type: web
+    name: student-dummy-service-2
+    runtime: node
+    rootDir: dummy-service-2
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /health
+    plan: free
+    envVars:
+      - key: NODE_VERSION
+        value: 20
