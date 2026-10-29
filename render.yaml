@@ -16,3 +16,17 @@ services:
         sync: false
       - key: NODE_VERSION
         value: 20
+
+  - type: web
+    name: student-mcp-server
+    runtime: node
+    rootDir: mcp-server
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /health
+    plan: starter
+    envVars:
+      - key: API_BASE_URL   # your student-api URL, e.g. https://student-api.onrender.com
+        sync: false
+      - key: NODE_VERSION
+        value: 20
