@@ -46,3 +46,23 @@ services:
         sync: false
       - key: NODE_VERSION
         value: 20
+
+  - type: web
+    name: student-status-service
+    runtime: node
+    rootDir: status-service
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /health
+    plan: starter
+    envVars:
+      - key: FRONTEND_URL   # your Netlify URL
+        sync: false
+      - key: API_BASE_URL   # your student-api URL
+        sync: false
+      - key: MCP_URL        # your student-mcp-server URL
+        sync: false
+      - key: REPORTS_URL    # your student-reports-service URL
+        sync: false
+      - key: NODE_VERSION
+        value: 20

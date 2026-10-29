@@ -1,0 +1,15 @@
+{
+  "name": "student-status-service",
+  "version": "1.0.0",
+  "description": "Status dashboard that shows whether each service of the Student Information Management System is up",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}
